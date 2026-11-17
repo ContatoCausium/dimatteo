@@ -14,3 +14,9 @@
   .flavor__price small { font-size: 13px; }
   .menu .cta-row { top: auto; bottom: 22px; transform: none; }
 }
+
+/* celular deitado (tela baixa): a descrição mais longa (costelinha) passava do pé da tela. Mais larga e um corpo
+   menor, ela fica em três linhas */
+@media (orientation: landscape) and (max-height: 520px) {
+  .flavor__desc { width: min(27vw, 330px); font-size: 15px; }
+}

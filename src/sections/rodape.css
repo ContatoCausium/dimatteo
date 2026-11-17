@@ -24,6 +24,12 @@
 .rodape__land { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; z-index: 2; user-select: none; }
 .rodape__end { display: flex; justify-content: space-between; padding: 16px 0 20px; font-size: 14px; color: var(--tinta-2); }
 .rodape__end a { text-decoration: none; }
+.rodape__end p { margin: 0; }
+.rodape__credit .lnk { font-weight: 700; color: var(--tinta); }
+/* o ícone do Instagram vai dentro do link: a tira vermelha sobe por trás dos dois e o traço vira creme junto (currentColor) */
+.rodape .lnk--ig { display: inline-flex; align-items: center; gap: .42em; }
+.ig { width: 1.15em; height: 1.15em; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; }
+.ig__dot { fill: currentColor; stroke: none; }
 
 @media (max-width: 759px), (max-aspect-ratio: 4/5) {
   .rodape { padding: 84px 18px 0; }
@@ -33,5 +39,8 @@
   .rodape__sep { display: block; height: 0; overflow: hidden; } /* na coluna estreita, um link por linha */
   .rodape__scene { margin: 36px -18px 0; height: 92vw; }
   .rodape__land { object-position: 64% 100%; } /* a casa com o forno fica no recorte */
+  /* três itens não cabem numa linha: o crédito desce para a sua, embaixo */
+  .rodape__end { flex-wrap: wrap; row-gap: 10px; }
+  .rodape__credit { order: 3; width: 100%; }
 
 }
