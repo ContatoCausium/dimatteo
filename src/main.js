@@ -44,12 +44,10 @@ const fonts = Promise.all([
   document.fonts.load('500 16px "Cabinet Grotesk"'),
   document.fonts.load('700 16px "Cabinet Grotesk"'),
 ]);
-const decode = (src) => { const i = new Image(); i.src = src; return i.decode().catch(() => {}); };
-const assets = [
-  fonts,
-  decode('/img/pizza-marguerita.webp'),
-  ...['calabresa', 'frango', 'lombo', 'costelinha'].map((n) => decode(`/img/pizza-${n}.webp`)),
-];
+// A abertura espera só o que a primeira tela mostra: as fontes e a pizza da hero (a mesma <img> do palco, com o
+// srcset já resolvido). Os outros sabores carregam por trás e só aparecem duas telas depois, no cardápio.
+const decode = (img) => (img.complete ? img.decode() : new Promise((ok) => img.addEventListener('load', ok, { once: true })).then(() => img.decode())).catch(() => {});
+const assets = [fonts, decode(document.querySelector('.pz__whole'))];
 
 await fonts;
 

@@ -1,0 +1,27 @@
+/* Política de privacidade: folha de farinha com grão, título em Clash Display, texto em Cabinet Grotesk.
+   A barra de rolagem nativa volta aqui (no site ela é escondida e trocada pela própria, que só existe no palco). */
+html.pv { scrollbar-width: auto; }
+html.pv::-webkit-scrollbar { display: block; }
+.pv body { background: var(--farinha) url('/img/grao.webp') 0 0 / 300px; background-blend-mode: soft-light; }
+
+.pv__top { display: flex; justify-content: space-between; align-items: center; padding: var(--nav-y) var(--gutter); font-size: var(--t-nav); }
+.pv__brand { font-family: var(--f-display); font-weight: 700; font-size: clamp(20px, 1.6vw, 28px); letter-spacing: -0.035em; word-spacing: .12em; color: var(--vermelho); }
+
+.pv__main { max-width: 760px; margin: 0 auto; padding: clamp(32px, 7vh, 90px) var(--gutter) clamp(60px, 10vh, 120px); }
+.pv__title { color: var(--vermelho); font-size: clamp(44px, 4.4vw + 8px, 88px); }
+.pv__lead { margin-top: clamp(24px, 4vh, 40px); }
+.pv__date { margin-top: 14px; font-size: 14px; color: var(--tinta-2); }
+
+.pv__sec { margin-top: clamp(36px, 6vh, 56px); padding-top: 22px; border-top: 1.5px solid rgba(21, 17, 14, .16); line-height: 1.55; }
+.pv__sec h2 { font-family: var(--f-display); font-weight: 600; font-size: clamp(22px, 1.2vw + 14px, 30px); letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 14px; }
+.pv__sec p + p { margin-top: 12px; }
+.pv__sec ul { margin: 12px 0; display: grid; gap: 10px; }
+.pv__sec li { padding-left: 22px; position: relative; }
+.pv__sec li::before { content: ''; position: absolute; left: 4px; top: .62em; width: 7px; height: 7px; border-radius: 50%; background: var(--vermelho); }
+.pv__sec strong { font-weight: 700; }
+/* os links do texto: a mesma tira vermelha do site, com um fio embaixo em repouso para se lerem como link */
+.pv__sec .lnk { font-weight: 700; box-shadow: inset 0 -1.5px 0 var(--vermelho); }
+
+.pv__end { display: flex; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; max-width: calc(760px + 2 * var(--gutter)); margin: 0 auto; padding: 18px var(--gutter) 24px; border-top: 1.5px solid rgba(21, 17, 14, .16); font-size: 14px; color: var(--tinta-2); }
+.pv__end p { margin: 0; }
+.pv__end b { color: var(--tinta); }

@@ -20,7 +20,6 @@ export function pizza(root) {
   const cuts = [...root.querySelectorAll('.pz__cuts i')];
   const fire = root.querySelector('.pz__fire');
   const shadow = root.querySelector('.pz__shadow');
-  const src = whole.getAttribute('src');
   let S = 1000; // lado do elemento (px), igual ao maior tamanho em que a pizza aparece
 
   const noise = Array.from({ length: N }, (_, k) => rayNoise(k));
@@ -29,11 +28,15 @@ export function pizza(root) {
     const el = document.createElement('div');
     el.className = 'slice';
     el.innerHTML = '<div class="slice__img"></div>';
-    el.firstChild.style.backgroundImage = `url(${src})`;
     box.append(el);
     // giro de cada fatia ao se soltar (graus) e um tico de atraso, para não saírem em bloco
     slices.push({ el, img: el.firstChild, v: 0, spin: [2.2, -1.6, 1.4, -2.6, 1.8, -1.2, 2.8, -2][i], bis: 0, cx: 0, cy: 0, ox: 0, oy: 0 });
   }
+
+  // as fatias recortam a mesma foto que a <img> inteira: a do srcset que o navegador escolheu (só se sabe depois de
+  // ela carregar; o corte vem bem depois da abertura, que espera esta foto)
+  const useSrc = () => { const u = whole.currentSrc || whole.src; slices.forEach((sl) => { sl.img.style.backgroundImage = `url(${u})`; }); };
+  if (whole.complete && whole.currentSrc) useSrc(); else whole.addEventListener('load', useSrc, { once: true });
 
   // geometria das cunhas em px do elemento (S × S)
   function build(size) {

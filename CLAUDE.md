@@ -25,3 +25,12 @@ cardápio giratório → forno → massa → caixa → card de pedido → rodap�
 
 ## Rodar
 `npm run dev` (porta 5182) · `npm run build` → `dist/` em qualquer hospedagem estática.
+
+## Desempenho e SEO (Raio-X ProfitizeBuild, nov/2026)
+- Pizzas em 2 larguras (1400 e 800, WebP q78) com `srcset`/`sizes`; as fatias usam o `currentSrc` da `<img>` inteira.
+  Gere de novo com `py fonte/scripts/recorta_pizzas.py`.
+- A abertura espera só as fontes e a pizza da hero (`main.js`); os outros sabores carregam por trás.
+- O CSS vai embutido no `<head>` no build (plugin `inlineCss` em `vite.config.js`): nada bloqueia a primeira tela.
+- `public/og.jpg` (1200x630, `fonte/scripts/og.py`), tags og/twitter, JSON-LD `Restaurant` (sem horário: os dias
+  ainda não foram confirmados), `robots.txt`, `sitemap.xml`, página `/privacidade` (`privacidade.html`,
+  `cleanUrls` no `vercel.json`).

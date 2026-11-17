@@ -39,8 +39,10 @@
   .rodape__sep { display: block; height: 0; overflow: hidden; } /* na coluna estreita, um link por linha */
   .rodape__scene { margin: 36px -18px 0; height: 92vw; }
   .rodape__land { object-position: 64% 100%; } /* a casa com o forno fica no recorte */
-  /* três itens não cabem numa linha: o crédito desce para a sua, embaixo */
-  .rodape__end { flex-wrap: wrap; row-gap: 10px; }
-  .rodape__credit { order: 3; width: 100%; }
+  /* quatro itens não cabem numa linha: duas linhas, © e "voltar ao topo" em cima, crédito e privacidade embaixo */
+  .rodape__end { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; }
+  .rodape__end > [data-go="topo"] { justify-self: end; }
+  .rodape__priv { order: 4; justify-self: end; }
+  .rodape__credit { order: 3; }
 
 }

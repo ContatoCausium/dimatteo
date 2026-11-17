@@ -24,9 +24,12 @@ for f in sorted(src.glob('pizza-*.jpg')):
     big = cut.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
     canvas = Image.new('RGBA', (OUT, OUT), (0, 0, 0, 0))
     canvas.paste(big, (round(OUT / 2 - cx * s), round(OUT / 2 - cy * s)), big)
-    dst = Path('public/img') / (f.stem + '.webp')
-    canvas.save(dst, 'WEBP', quality=88, method=6)
-    print(f'{dst} centro {cx:.0f},{cy:.0f} raio {R:.0f} escala {s:.3f}')
+    # duas larguras para o srcset: 1400 (desktop e celulares de tela densa) e 800 (o resto); qualidade 78
+    for w, suf in ((1400, ''), (800, '-800')):
+        dst = Path('public/img') / f'{f.stem}{suf}.webp'
+        img = canvas if w == OUT else canvas.resize((w, w), Image.LANCZOS)
+        img.save(dst, 'WEBP', quality=78, method=6, alpha_quality=90)
+        print(f'{dst} {dst.stat().st_size // 1024} KB')
 
 # folha de conferência: as cinco lado a lado sobre a farinha e sobre o vinho
 names = ['marguerita', 'calabresa', 'frango', 'lombo', 'costelinha']

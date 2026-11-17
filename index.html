@@ -6,9 +6,49 @@
   <title>Di Matteo Pizzaria · Recife</title>
   <meta name="description" content="Pizza grande de 35 cm com massa de 48 horas de fermentação e molho pomodoro pelati. Delivery em Recife e retirada na Estrada de Belém, 1462, Campo Grande.">
   <meta name="theme-color" content="#f0e8db">
+  <link rel="canonical" href="https://dimatteo-fkkg.vercel.app/">
+  <!-- prévia do link no WhatsApp, Instagram e Google -->
+  <meta property="og:title" content="Di Matteo Pizzaria · Recife">
+  <meta property="og:description" content="Pizza grande de 35 cm com massa de 48 horas de fermentação e molho pomodoro pelati. Delivery em Recife e retirada na Estrada de Belém, 1462, Campo Grande.">
+  <meta property="og:image" content="https://dimatteo-fkkg.vercel.app/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Di Matteo Pizzaria: pizza marguerita vista de cima sob o nome da pizzaria">
+  <meta property="og:url" content="https://dimatteo-fkkg.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- dados estruturados: só o que aparece na página (sem horário: os dias de funcionamento ainda não foram confirmados) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Di Matteo Pizzaria",
+    "url": "https://dimatteo-fkkg.vercel.app/",
+    "image": "https://dimatteo-fkkg.vercel.app/og.jpg",
+    "logo": "https://dimatteo-fkkg.vercel.app/apple-touch-icon.png",
+    "description": "Pizza grande de 35 cm com massa de 48 horas de fermentação e molho pomodoro pelati. Delivery em Recife e retirada no balcão.",
+    "servesCuisine": "Pizza",
+    "telephone": "+55-81-99670-8756",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Estr. de Belém, 1462",
+      "addressLocality": "Recife",
+      "addressRegion": "PE",
+      "addressCountry": "BR"
+    },
+    "hasMenu": "https://app.cardapioweb.com/di_matteo",
+    "acceptsReservations": false,
+    "sameAs": ["https://www.instagram.com/dimatteopizza/"],
+    "contactPoint": [
+      { "@type": "ContactPoint", "telephone": "+55-81-99670-8756", "contactType": "customer service", "areaServed": "BR", "availableLanguage": "Portuguese" },
+      { "@type": "ContactPoint", "telephone": "+55-81-3877-4578", "contactType": "customer service", "areaServed": "BR", "availableLanguage": "Portuguese" }
+    ]
+  }
+  </script>
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="preload" href="/img/pizza-marguerita.webp" as="image" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="/img/pizza-marguerita.webp" imagesrcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita.webp 1400w" imagesizes="(max-width: 759px) 150vw, 85vw">
 </head>
 <body class="is-loading">
   <a class="skip" href="#pedido" data-go="pedido" data-focus=".opt__link">Ir para o pedido</a>
@@ -41,10 +81,10 @@
         </div>
 
         <div class="win" aria-hidden="true">
-          <div class="win__layer win__layer--forno"><img src="/img/forno.webp" alt="" width="1600" height="1067" decoding="async"></div>
-          <div class="win__layer win__layer--massa"><img src="/img/massa.webp" alt="" width="1600" height="1067" decoding="async"></div>
+          <div class="win__layer win__layer--forno"><img src="/img/forno.webp" fetchpriority="low" alt="" width="1600" height="1067" decoding="async"></div>
+          <div class="win__layer win__layer--massa"><img src="/img/massa.webp" fetchpriority="low" alt="" width="1600" height="1067" decoding="async"></div>
           <div class="win__layer win__layer--kraft"></div>
-          <div class="win__layer win__layer--caixa"><img src="/img/caixa-base.webp" alt="" width="1200" height="1200" decoding="async"></div>
+          <div class="win__layer win__layer--caixa"><img src="/img/caixa-base.webp" fetchpriority="low" alt="" width="1200" height="1200" decoding="async"></div>
           <i class="win__lip"></i>
         </div>
 
@@ -52,7 +92,7 @@
         <div class="pz" aria-hidden="true">
           <i class="pz__shadow"></i>
           <div class="pz__body">
-            <img class="pz__whole" src="/img/pizza-marguerita.webp" alt="" width="1400" height="1400" decoding="async">
+            <img class="pz__whole" src="/img/pizza-marguerita.webp" srcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="high" alt="" width="1400" height="1400" decoding="async">
             <div class="pz__slices"></div>
             <div class="pz__cuts"><i></i><i></i><i></i><i></i></div>
             <i class="pz__fire"></i>
@@ -60,11 +100,11 @@
         </div>
 
         <div class="platter" aria-hidden="true">
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-marguerita.webp" alt="" width="1400" height="1400" decoding="async"></div>
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-calabresa.webp" alt="" width="1400" height="1400" decoding="async"></div>
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-frango.webp" alt="" width="1400" height="1400" decoding="async"></div>
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-lombo.webp" alt="" width="1400" height="1400" decoding="async"></div>
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-costelinha.webp" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-marguerita.webp" srcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-calabresa.webp" srcset="/img/pizza-calabresa-800.webp 800w, /img/pizza-calabresa.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-frango.webp" srcset="/img/pizza-frango-800.webp 800w, /img/pizza-frango.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-lombo.webp" srcset="/img/pizza-lombo-800.webp 800w, /img/pizza-lombo.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-costelinha.webp" srcset="/img/pizza-costelinha-800.webp 800w, /img/pizza-costelinha.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
         </div>
 
         <!-- camadas da frente: a tampa da caixa e o card de pedido -->
@@ -200,6 +240,7 @@
     </div>
     <div class="rodape__end">
       <p>© 2026 Di Matteo Pizzaria</p>
+      <a class="lnk rodape__priv" href="/privacidade">Política de privacidade</a>
       <p class="rodape__credit">Construído pela <a class="lnk" href="https://www.filipimoraes.com" target="_blank" rel="noopener">FM</a></p>
       <a class="lnk" href="#topo" data-go="topo">Voltar ao topo ↑</a>
     </div>
