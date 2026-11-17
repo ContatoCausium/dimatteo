@@ -1,0 +1,1 @@
+Baixe as fontes do Fontshare e ponha aqui os .woff2 (ver a Parte 2 do prompt): ClashDisplay-Semibold, ClashDisplay-Bold, Gambetta-Italic, Gambetta-MediumItalic, Gambetta-SemiboldItalic, CabinetGrotesk-Regular, CabinetGrotesk-Medium, CabinetGrotesk-Bold, CabinetGrotesk-Extrabold.

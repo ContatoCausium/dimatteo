@@ -1,0 +1,10 @@
+/* forno: a boca no centro; título à esquerda, texto à direita, como os lados da hero */
+.forno__title { position: absolute; left: var(--gutter); top: calc(var(--a-t) + 2vh); font-size: clamp(32px, 2.2vw + 12px, 54px); color: var(--creme); visibility: hidden; }
+.forno__title em { font-style: normal; color: var(--vermelho-aceso); }
+.forno__num { font-variant-numeric: tabular-nums; }
+.forno__text { position: absolute; left: calc(var(--a-r) + 3.4vw); right: var(--gutter); bottom: calc(100% - var(--a-b)); max-width: 300px; color: var(--creme-2); font-size: var(--t-side); line-height: 1.28; visibility: hidden; }
+
+@media (max-width: 759px), (max-aspect-ratio: 4/5) {
+  .forno__title { left: 18px; top: calc(var(--a-t) - 108px); font-size: 38px; }
+  .forno__text { left: 18px; right: 18px; bottom: auto; top: calc(var(--a-b) + 24px); max-width: none; font-size: 16px; }
+}

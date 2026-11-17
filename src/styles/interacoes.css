@@ -1,0 +1,111 @@
+/* Interações da Fermento. Todo clicável tem os mesmos quatro estados, na linguagem do site:
+   - Hover (mouse): o vermelho sobe como a massa. Uma tira vermelha nasce da linha de base e cresce por trás da peça;
+     a beira de cima é de papel rasgado e passa pela peça na subida (no fim, o bloco fica limpo). Sobe com fm-out
+     (--t-in) e desce com fm-in (--t-out), as mesmas curvas do resto do site.
+   - Foco pelo teclado: o mesmo estado do hover, mais um anel vermelho.
+   - Clique: a peça afunda para 0,97 com a tinta mais escura e, ao soltar, volta passando um tico (--fm-back).
+   - Toque (celular, sem hover): a classe .is-touch (src/motion/toque.js) dá o visual do hover enquanto o dedo está
+     na peça e um instante depois de soltar; começar a rolar em cima de um link não acende nada.
+   O hover fica em @media (hover: hover), para não grudar no celular, e descansa enquanto a página rola
+   (.is-scrolling, src/motion/rolando.js): com o cursor parado, a rolagem não acende o que passa por baixo dele. A nav
+   fica fora disso, porque é fixa: o hover nela é sempre de propósito. O :where() não soma especificidade, para o
+   :active continuar ganhando do hover. Com movimento reduzido, os estados
+   trocam sem animação (base.css). O prato giratório tem estados próprios em src/motion/prato.js. */
+
+/* ---- a tira vermelha: mais alta que a peça pela faixa rasgada, que fica acima dela quando a tira está de pé ---- */
+.lnk, .btn__pill, .btn__dot, .opt__link { position: relative; overflow: hidden; isolation: isolate; }
+.lnk::before, .btn__pill::before, .btn__dot::before, .opt__link::before {
+  content: ''; position: absolute; left: 0; right: 0; top: -14px; bottom: 0; z-index: -1; pointer-events: none;
+  background-color: var(--vermelho);
+  -webkit-mask: url('/img/rasgo-tira.webp') 0 0 / auto 14px repeat-x, linear-gradient(#000 0 0) 0 13px / 100% 100% no-repeat;
+  mask: url('/img/rasgo-tira.webp') 0 0 / auto 14px repeat-x, linear-gradient(#000 0 0) 0 13px / 100% 100% no-repeat;
+  transform: translateY(100%);
+  transition: transform var(--t-out) var(--fm-in), background-color var(--t-press) linear;
+}
+/* de pé: hover, foco pelo teclado e toque */
+:is(.lnk, .opt__link):is(:focus-visible, .is-touch)::before,
+.btn:is(:focus-visible, .is-touch) :is(.btn__pill, .btn__dot)::before { transform: none; transition: transform var(--t-in) var(--fm-out), background-color var(--t-press) linear; }
+@media (hover: hover) {
+  :where(html:not(.is-scrolling), .nav) :is(.lnk, .opt__link):hover::before,
+  :where(html:not(.is-scrolling), .nav) .btn:hover :is(.btn__pill, .btn__dot)::before { transform: none; transition: transform var(--t-in) var(--fm-out), background-color var(--t-press) linear; }
+}
+/* apertado: a tinta escurece */
+:is(.lnk, .opt__link):active::before, .btn:active :is(.btn__pill, .btn__dot)::before { background-color: var(--vermelho-press); }
+
+/* ---- links de texto: nav, e-mail da hero, informações e "voltar ao topo" do rodapé ---- */
+/* vertical-align: top porque o overflow: hidden põe a linha de base do inline-block na borda de baixo: o link subia
+   ~8 px e o "·" entre Instagram e WhatsApp parecia um ponto final. A caixa tem uma linha de altura (o padding é
+   devolvido pela margem), então presa no alto da linha ela cai na mesma base do texto em volta. */
+.lnk {
+  display: inline-block; vertical-align: top; padding: .08em .32em .06em; margin: -.08em -.32em -.06em; border-radius: 3px;
+  text-decoration: none; color: inherit; -webkit-tap-highlight-color: transparent;
+  transition: color var(--t-out) var(--fm-in), transform .45s var(--fm-back);
+}
+.lnk:is(:focus-visible, .is-touch) { color: var(--creme); transition: color .3s var(--fm-out) .06s, transform .45s var(--fm-back); }
+@media (hover: hover) { :where(html:not(.is-scrolling), .nav) .lnk:hover { color: var(--creme); transition: color .3s var(--fm-out) .06s, transform .45s var(--fm-back); } }
+/* apertado e arrastado para fora: o texto volta à tinta no mesmo passo da tira que desce */
+.lnk:active { transform: scale(.97); transition: color var(--t-out) var(--fm-in), transform var(--t-press) var(--fm-out); }
+.lnk:focus-visible { outline: 2px solid var(--vermelho); outline-offset: 3px; }
+
+/* ---- botões (pílula + seta no círculo): hero, sabor e rodapé ---- */
+.btn { -webkit-tap-highlight-color: transparent; }
+/* um fio de tinta por dentro da borda: sobre a foto (o molho é vermelho), a pílula vermelha não some; em repouso ele
+   tem a cor do botão */
+.btn__pill, .btn__dot { outline: 2px solid var(--tinta); outline-offset: -2px; transition: transform .45s var(--fm-back), box-shadow .3s var(--fm-out); }
+.btn__dot svg { transition: transform .5s var(--fm-out); }
+.btn:is(:focus-visible, .is-touch) .btn__dot::before { transition-delay: .05s; }
+@media (hover: hover) { :where(html:not(.is-scrolling), .nav) .btn:hover .btn__dot::before { transition-delay: .05s; } }
+/* a seta vira para cima, como quem aponta o pedido */
+.btn:is(:focus-visible, .is-touch) .btn__dot svg { transform: rotate(-45deg); }
+@media (hover: hover) { :where(html:not(.is-scrolling), .nav) .btn:hover .btn__dot svg { transform: rotate(-45deg); } }
+.btn:active :is(.btn__pill, .btn__dot) { transform: scale(.97); transition: transform var(--t-press) var(--fm-out), box-shadow .3s var(--fm-out); }
+/* foco: anel em cada peça (a pílula e o círculo), com folga de farinha para aparecer também sobre a foto */
+.btn:focus-visible { outline: none; }
+.btn:focus-visible :is(.btn__pill, .btn__dot) { box-shadow: 0 0 0 3px var(--farinha), 0 0 0 5px var(--vermelho); }
+
+/* ---- linhas do card de pedido: a tinta vermelha sobe como um carimbo no kraft ---- */
+.opt__link {
+  --pad: clamp(12px, 1.4vw, 24px);
+  margin: 6px calc(-1 * var(--pad)); padding: 0 var(--pad); border-radius: 14px;
+  transition: transform .45s var(--fm-back);
+}
+.opt__link::before { background-image: url('/img/kraft.webp'); background-size: max(1520px, 100vw) auto; background-blend-mode: multiply; }
+.opt__name, .opt__desc { transition: color var(--t-out) var(--fm-in); }
+.opt__go { transition: background-color var(--t-out) var(--fm-in), color var(--t-out) var(--fm-in); }
+.opt__go svg { transition: transform .5s var(--fm-out); }
+.opt__link:is(:focus-visible, .is-touch) .opt__name { color: var(--creme); transition: color .3s var(--fm-out) .06s; }
+.opt__link:is(:focus-visible, .is-touch) .opt__desc { color: rgba(246, 239, 227, .88); transition: color .3s var(--fm-out) .06s; }
+.opt__link:is(:focus-visible, .is-touch) .opt__go { background: var(--creme); color: var(--vermelho); transition: background-color .3s var(--fm-out) .06s, color .3s var(--fm-out) .06s; }
+.opt__link:is(:focus-visible, .is-touch) .opt__go svg { transform: rotate(-45deg); }
+@media (hover: hover) {
+  :where(html:not(.is-scrolling), .nav) .opt__link:hover .opt__name { color: var(--creme); transition: color .3s var(--fm-out) .06s; }
+  :where(html:not(.is-scrolling), .nav) .opt__link:hover .opt__desc { color: rgba(246, 239, 227, .88); transition: color .3s var(--fm-out) .06s; }
+  :where(html:not(.is-scrolling), .nav) .opt__link:hover .opt__go { background: var(--creme); color: var(--vermelho); transition: background-color .3s var(--fm-out) .06s, color .3s var(--fm-out) .06s; }
+  :where(html:not(.is-scrolling), .nav) .opt__link:hover .opt__go svg { transform: rotate(-45deg); }
+}
+.opt__link:active { transform: scale(.985); transition: transform var(--t-press) var(--fm-out); }
+.opt__link:focus-visible { outline: 2px solid var(--vermelho); outline-offset: 3px; }
+
+/* ---- o prato giratório: um botão redondo em cima da pizza da vez (o movimento é do prato.js) ---- */
+.plate-hit {
+  position: absolute; left: calc(var(--m-x) - var(--m-r)); top: calc(var(--m-y) - var(--m-r));
+  width: calc(var(--m-r) * 2); height: calc(var(--m-r) * 2); margin: 0; padding: 0; border: 0; border-radius: 50%;
+  background: transparent; cursor: pointer; pointer-events: auto; visibility: hidden; -webkit-tap-highlight-color: transparent;
+}
+.plate-hit.is-on { visibility: visible; }
+.plate-hit:focus-visible { outline: 2px solid var(--vermelho); outline-offset: 12px; }
+
+/* ---- a nav sai quando o rodapé chega nela; com o foco do teclado num link dela, volta ---- */
+.nav.is-on.is-away:focus-within { opacity: 1; transform: none; }
+.nav.is-away:focus-within .nav__links { pointer-events: auto; }
+
+/* ---- pular para o pedido (só aparece pelo teclado, no meio do alto, onde a nav não tem nada) ---- */
+.skip { left: 50%; transform: translateX(-50%); background: var(--vermelho); color: var(--creme); font-weight: 700; transition: top .45s var(--fm-out), transform .45s var(--fm-back), background-color var(--t-press) linear; }
+@media (hover: hover) { .skip:hover { background: var(--vermelho-press); } }
+.skip:active { transform: translateX(-50%) scale(.97); transition: top .45s var(--fm-out), transform var(--t-press) var(--fm-out); }
+.skip:focus-visible { outline: 2px solid var(--tinta); outline-offset: 3px; }
+
+@media (max-width: 759px), (max-aspect-ratio: 4/5) {
+  .opt__link { margin: 4px calc(-1 * var(--pad)); border-radius: 10px; }
+  .plate-hit:focus-visible { outline-offset: 8px; }
+}

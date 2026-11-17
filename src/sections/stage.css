@@ -1,0 +1,85 @@
+/* O palco: tela cheia, preso pelo ScrollTrigger. Um contexto de empilhamento só, para a pizza ficar entre a palavra
+   (atrás) e os textos e a tampa da caixa (na frente). */
+.film { position: relative; }
+.stage { position: relative; height: 100vh; height: 100lvh; overflow: hidden; isolation: isolate; background: var(--farinha); }
+.stage__bg { position: absolute; inset: 0; z-index: 0; background: var(--farinha) url('/img/grao.webp') 0 0 / 300px; background-blend-mode: soft-light; }
+/* quando o rodapé sobe, o palco fica um tico na sombra dele */
+.stage__dim { position: absolute; inset: 0; z-index: 9; background: #1b0f07; opacity: 0; pointer-events: none; }
+
+/* palavras gigantes: posição e corpo vêm do layout.js (words.place) */
+.word, .name, .massa__num, .rodape__word {
+  position: absolute; margin: 0; line-height: 1; white-space: nowrap;
+  font-kerning: none; letter-spacing: 0; user-select: none;
+}
+.word { z-index: 1; font-family: var(--f-display); font-weight: 700; color: var(--vermelho); visibility: hidden; }
+.names { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.name { font-family: var(--f-serif); font-style: italic; font-weight: 600; color: var(--vermelho); visibility: hidden; }
+.ch { display: inline-block; transform-origin: 50% var(--base, 80%); will-change: transform; }
+.ch--sp { white-space: pre; }
+
+/* a janela: boca do forno → card da massa → caixa aberta (clip-path vem do win.js) */
+.win { position: absolute; inset: 0; z-index: 2; visibility: hidden; transform-origin: 50% 60%; }
+.win__layer { position: absolute; overflow: hidden; will-change: transform; }
+.win__layer img { width: 100%; height: 100%; object-fit: cover; }
+.win__layer--forno { --lit: 0; }
+.win__layer--forno img { filter: brightness(calc(0.25 + var(--lit) * 0.8)) saturate(calc(0.7 + var(--lit) * 0.35)); }
+.win__layer--forno::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, transparent calc(var(--lit) * 120% - 20%), var(--brasa) calc(var(--lit) * 120% + 10%)); }
+.win__layer--massa, .win__layer--kraft { visibility: hidden; }
+/* a macro tem o molho à esquerda: uma sombra quente abre espaço para o "48 h" sem esconder os alvéolos */
+.win__layer--massa::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(18, 11, 8, .93) 0%, rgba(18, 11, 8, .84) 28%, rgba(18, 11, 8, .42) 46%, rgba(18, 11, 8, 0) 60%); }
+.win__layer--kraft { background: var(--kraft) url('/img/kraft.webp') center / max(1520px, 100vw) auto; }
+.win__layer--caixa { opacity: 0; }
+.win__lip { position: absolute; pointer-events: none; background: radial-gradient(120% 92% at 50% 100%, transparent 58%, rgba(8, 4, 2, .62) 100%); }
+
+/* a pizza (e as fatias): tamanho e pose vêm do pizza.js */
+.pz { position: absolute; left: 0; top: 0; z-index: 3; visibility: hidden; transform-origin: 50% 50%; will-change: transform; }
+.pz__body { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.pz__whole { position: absolute; inset: 0; width: 100%; height: 100%; user-select: none; -webkit-user-drag: none; }
+.pz__shadow, .plate__shadow {
+  position: absolute; left: 3%; top: 5.5%; width: 96%; height: 96%; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(84, 46, 18, .34), rgba(84, 46, 18, .2) 72%, rgba(84, 46, 18, 0));
+  filter: blur(0.6px);
+}
+.pz__slices { position: absolute; inset: 0; display: none; }
+.slice { position: absolute; overflow: hidden; will-change: transform; filter: drop-shadow(0 10px 12px rgba(76, 38, 12, .3)); }
+.slice__img { position: absolute; background-size: 100% 100%; background-repeat: no-repeat; }
+.pz__cuts i { position: absolute; height: 3px; margin-top: -1.5px; transform-origin: 0 50%; opacity: 0; border-radius: 2px; background: linear-gradient(rgba(38, 16, 6, .7), rgba(38, 16, 6, .38)); box-shadow: 0 1px 0 rgba(255, 236, 214, .3); }
+.pz__fire {
+  position: absolute; left: 4%; top: 4%; width: 92%; height: 92%; border-radius: 50%; opacity: 0; pointer-events: none;
+  background: radial-gradient(90% 90% at 18% 0%, rgba(255, 150, 60, .55), rgba(120, 40, 10, .55) 60%, rgba(20, 6, 2, .75));
+  mix-blend-mode: multiply;
+}
+
+/* o prato giratório do cardápio */
+.platter { position: absolute; inset: 0; z-index: 3; visibility: hidden; pointer-events: none; }
+.plate { position: absolute; left: 0; top: 0; display: none; transform-origin: 50% 50%; will-change: transform; }
+.plate img { position: absolute; inset: 0; width: 100%; height: 100%; transform-origin: 50% 50%; }
+
+/* a tampa da caixa (CSS 3D) */
+.lid { position: absolute; z-index: 4; visibility: hidden; perspective-origin: 50% 50%; transform-origin: 50% 50%; }
+.lid__flap { position: absolute; inset: 0; transform-origin: 50% 50%; }
+.lid__face {
+  position: absolute; inset: 0; border-radius: 6px; overflow: hidden;
+  background: var(--kraft) url('/img/kraft.webp') var(--kx, 0) var(--ky, 0) / max(1520px, 100vw) auto;
+  box-shadow: inset 0 0 0 1px rgba(80, 48, 22, .25), inset 0 -10px 18px rgba(70, 40, 16, .18);
+}
+.lid__face--out {
+  /* a aba da frente dobrada para baixo: uma faixa mais escura com um fio de luz na dobra */
+  background:
+    linear-gradient(to top, rgba(74, 42, 16, .22) 0 4.6%, rgba(255, 238, 214, .16) 4.6% 5.2%, transparent 5.2%) 0 0 / 100% 100% no-repeat,
+    var(--kraft) url('/img/kraft.webp') var(--kx, 0) var(--ky, 0) / max(1520px, 100vw) auto;
+}
+/* sem preserve-3d (o Safari achata): o JS mostra uma face por vez; a de dentro, vista por trás, vem espelhada */
+.lid__face--in { transform: scaleY(-1); filter: brightness(1.06) saturate(.9); visibility: hidden; }
+.lid__face--in::before { content: ''; position: absolute; left: 0; right: 0; top: 7%; height: 2px; background: rgba(70, 40, 16, .28); }
+.lid__shade { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(40, 22, 8, .9), rgba(40, 22, 8, .55)); opacity: 0; }
+.stamp {
+  font-family: var(--f-display); font-weight: 700; color: var(--vermelho); letter-spacing: -0.035em; word-spacing: .12em; line-height: 1;
+  mix-blend-mode: multiply; white-space: nowrap; user-select: none;
+}
+.lid .stamp { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -54%); font-size: calc(var(--bs) * 0.132); opacity: .93; }
+
+@media (max-width: 759px), (max-aspect-ratio: 4/5) {
+  .win__layer--massa img { object-position: 62% 0%; }
+  .win__layer--massa::after { background: linear-gradient(180deg, rgba(18, 11, 8, .9) 0%, rgba(18, 11, 8, .62) 30%, rgba(18, 11, 8, 0) 52%); }
+}

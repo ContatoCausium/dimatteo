@@ -1,0 +1,40 @@
+:root {
+  /* cor */
+  --farinha: #f0e8db;
+  --farinha-2: #e5dbca;
+  --vermelho: #921f31; /* o vinho da marca Di Matteo */
+  --vermelho-aceso: #d9475a; /* o mesmo vinho sobre o preto-brasa (forno e massa), onde o #921f31 apaga */
+  --tinta: #15110e;
+  --tinta-2: #5d5247;
+  --brasa: #120b08;
+  --creme: #f6efe3;
+  --creme-2: #bcae9c;
+  --kraft: #ca9f76;
+  --kraft-tinta: #3a2414;
+
+  /* tipo */
+  --f-display: 'Clash Display', 'Helvetica Neue', Arial, sans-serif;
+  --f-serif: 'Gambetta', Georgia, serif;
+  --f-text: 'Cabinet Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  --t-side: clamp(16px, 1.15vw + 9.6px, 27px);
+  --t-title: clamp(38px, 3.6vw + 10px, 72px);
+  --t-body: clamp(15px, 0.4vw + 11px, 18px);
+  --t-nav: clamp(14px, 0.25vw + 12px, 17px);
+
+  /* grade */
+  --gutter: clamp(18px, 3.6vw, 56px);
+  --nav-y: clamp(18px, 2.6vw, 38px);
+  --radius: clamp(18px, 1.8vw, 30px);
+
+  /* curvas (as mesmas do ease.js) */
+  --fm-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --fm-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --fm-io: cubic-bezier(0.76, 0, 0.24, 1);
+  --fm-back: cubic-bezier(0.2, 1.6, 0.38, 1); /* ao soltar um clique: volta passando um tico, como massa apertada */
+
+  /* interações (src/styles/interacoes.css) */
+  --t-in: .6s;    /* o vermelho sobe */
+  --t-out: .32s;  /* o vermelho desce */
+  --t-press: .12s;
+  --vermelho-press: #6f1624; /* a tinta apertada */
+}

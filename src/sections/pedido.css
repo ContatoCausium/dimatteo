@@ -1,0 +1,33 @@
+/* pedido: o card de kraft que nasce da tampa fechada. Carimbo e pergunta em cima; as três formas de pedir em
+   palavras grandes, uma por linha, como impressas na caixa (a linha inteira é o link) */
+.order { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.order__card {
+  position: absolute; visibility: hidden; overflow: hidden; pointer-events: auto; color: #2a170b;
+  background: var(--kraft) url('/img/kraft.webp') var(--kx, 0) var(--ky, 0) / max(1520px, 100vw) auto;
+  display: flex; flex-direction: column; padding: clamp(24px, 2.6vw, 44px) clamp(24px, 2.8vw, 48px) clamp(14px, 1.4vw, 24px);
+  box-shadow: inset 0 0 0 1px rgba(80, 48, 22, .22), inset 0 -24px 40px rgba(70, 40, 16, .14);
+}
+.order__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.order__stamp { font-size: clamp(44px, 4.4vw, 80px); transform-origin: 0 0; opacity: .93; }
+.order__title { font-size: clamp(30px, 1.8vw + 12px, 46px); color: #2a170b; text-align: right; visibility: hidden; }
+.order__opts { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; margin-top: clamp(16px, 2.4vh, 32px); }
+.opt { flex: 1; max-height: 9.4em; display: flex; border-top: 1.5px solid rgba(42, 23, 11, .3); visibility: hidden; }
+.opt__link {
+  flex: 1; display: grid; grid-template-columns: 1fr minmax(0, 26ch) auto; align-items: center; gap: clamp(16px, 3vw, 56px);
+  padding: 0 4px; text-decoration: none; color: inherit; -webkit-tap-highlight-color: transparent;
+}
+.opt__name { font-family: var(--f-display); font-weight: 600; font-size: clamp(40px, 4.6vw + 6px, 104px); line-height: 1; letter-spacing: -0.03em; }
+.opt__desc { font-size: var(--t-body); line-height: 1.4; color: rgba(42, 23, 11, .78); }
+.opt__go { display: grid; place-items: center; width: clamp(48px, 4vw, 64px); aspect-ratio: 1; border-radius: 50%; background: var(--tinta); color: var(--creme); }
+.opt__go svg { width: 40%; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (max-width: 759px), (max-aspect-ratio: 4/5) {
+  .order__card { padding: 22px 18px 8px; }
+  .order__head { flex-direction: column; gap: 10px; }
+  .order__stamp { font-size: 42px; }
+  .order__title { text-align: left; font-size: 34px; }
+  .opt__link { grid-template-columns: 1fr auto; grid-template-rows: auto auto; column-gap: 14px; row-gap: 6px; padding: 14px 2px; align-content: center; }
+  .opt__name { font-size: 36px; grid-column: 1; grid-row: 1; }
+  .opt__desc { grid-column: 1; grid-row: 2; font-size: 15px; }
+  .opt__go { grid-column: 2; grid-row: 1 / 3; width: 48px; }
+}

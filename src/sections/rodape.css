@@ -1,0 +1,37 @@
+/* rodapé: o espelho da hero. Em cima, o pedido e a informação; embaixo, a palavra atrás dos morros da gravura */
+/* sobe por cima do card de pedido (o último 100vh do pin), como uma folha de farinha rasgada no alto */
+.rodape { position: relative; z-index: 2; margin-top: -100vh; background: var(--farinha) url('/img/grao.webp') 0 0 / 300px; background-blend-mode: soft-light; padding: clamp(96px, 15vh, 170px) var(--gutter) 0; }
+/* a beira rasgada: sombra só acima da beira, e o papel com o mesmo preenchimento do rodapé (farinha + grão no mesmo
+   ladrilho), recortado pela forma e com a luz do miolo por cima; a emenda com o rodapé não aparece */
+.rodape__tear { --h: round(clamp(90px, 8vw, 150px), 2px); position: absolute; left: 0; right: 0; top: 0; height: var(--h); transform: translateY(-50%); pointer-events: none; }
+.rodape__tear::before, .rodape__tear::after { content: ''; position: absolute; inset: 0; }
+.rodape__tear::before { background: url('/img/rasgo-sombra.webp') center top / auto 100% repeat-x; }
+.rodape__tear::after {
+  background: url('/img/rasgo-luz.webp') center top / auto 100% repeat-x, url('/img/grao.webp') 0 calc(var(--h) / 2) / 300px, var(--farinha);
+  background-blend-mode: normal, soft-light;
+  -webkit-mask: url('/img/rasgo-forma.webp') center top / auto 100% repeat-x;
+  mask: url('/img/rasgo-forma.webp') center top / auto 100% repeat-x;
+}
+.rodape__top { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.rodape__lead { font-size: clamp(44px, 4.4vw + 8px, 96px); color: var(--tinta); }
+.rodape__info { display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 18px 32px; margin-top: clamp(40px, 7vh, 80px); padding-top: 20px; border-top: 1.5px solid rgba(21, 17, 14, .16); font-size: var(--t-body); }
+.rodape__k { display: block; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; color: var(--vermelho); margin-bottom: 6px; }
+.rodape__info a { text-decoration: none; }
+/* o "·" entre Instagram e WhatsApp com folga para a tira vermelha e o anel de foco de cada link não encostarem nele */
+.rodape__sep { margin: 0 .7em; }
+.rodape__scene { position: relative; height: 50vw; margin: clamp(24px, 6vh, 70px) calc(var(--gutter) * -1) 0; }
+.rodape__word { font-family: var(--f-display); font-weight: 700; color: var(--vermelho); z-index: 1; visibility: hidden; }
+.rodape__land { position: absolute; left: 0; bottom: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; z-index: 2; user-select: none; }
+.rodape__end { display: flex; justify-content: space-between; padding: 16px 0 20px; font-size: 14px; color: var(--tinta-2); }
+.rodape__end a { text-decoration: none; }
+
+@media (max-width: 759px), (max-aspect-ratio: 4/5) {
+  .rodape { padding: 84px 18px 0; }
+  .rodape__top { flex-direction: column; align-items: flex-start; }
+  .rodape__lead { font-size: 44px; }
+  .rodape__info { grid-template-columns: 1fr 1fr; justify-content: stretch; font-size: 15px; }
+  .rodape__sep { display: block; height: 0; overflow: hidden; } /* na coluna estreita, um link por linha */
+  .rodape__scene { margin: 36px -18px 0; height: 92vw; }
+  .rodape__land { object-position: 64% 100%; } /* a casa com o forno fica no recorte */
+
+}

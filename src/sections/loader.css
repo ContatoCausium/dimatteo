@@ -1,0 +1,8 @@
+/* abertura: o contador de horas onde a pizza vai entrar */
+.loader { position: absolute; left: 0; right: 0; top: calc(var(--wb) + 22vh); z-index: 7; display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--tinta); pointer-events: none; opacity: 0; }
+.loader__count { font-family: var(--f-display); font-weight: 600; font-size: clamp(44px, 3vw + 18px, 72px); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.loader__cap { font-family: var(--f-serif); font-style: italic; font-size: clamp(18px, 0.6vw + 12px, 24px); color: var(--tinta-2); }
+
+@media (max-width: 759px), (max-aspect-ratio: 4/5) {
+  .loader { top: calc(var(--wb) + 30vh); }
+}

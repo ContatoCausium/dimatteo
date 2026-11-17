@@ -1,0 +1,54 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--farinha); scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+body {
+  margin: 0;
+  background: var(--farinha);
+  color: var(--tinta);
+  font-family: var(--f-text);
+  font-weight: 500;
+  font-size: var(--t-body);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+body.is-loading { overflow: hidden; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+p, h1, h2, h3 { margin: 0; font-weight: inherit; }
+ol, ul { list-style: none; margin: 0; padding: 0; }
+i { font-style: normal; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: fixed; left: 12px; top: -60px; z-index: 100; background: var(--tinta); color: var(--creme); padding: 10px 16px; border-radius: 99px; text-decoration: none; }
+.skip:focus { top: 12px; }
+:focus-visible { outline: 2px solid var(--vermelho); outline-offset: 3px; }
+
+/* textos que se repetem entre as cenas */
+.side { font-size: var(--t-side); line-height: 1.24; letter-spacing: -0.012em; font-weight: 500; }
+.side a { text-decoration: none; }
+.title { font-family: var(--f-display); font-weight: 600; font-size: var(--t-title); line-height: 0.98; letter-spacing: -0.025em; white-space: nowrap; }
+
+/* botão: pílula + seta num círculo (como na hero) */
+.btn { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; color: var(--creme); font-weight: 700; font-size: clamp(15px, 0.35vw + 12px, 18px); letter-spacing: -0.01em; -webkit-tap-highlight-color: transparent; }
+.btn__pill { display: inline-flex; align-items: center; height: 3.2em; padding: 0 1.75em; border-radius: 99px; background: var(--tinta); }
+.btn__dot { display: grid; place-items: center; width: 3.2em; height: 3.2em; border-radius: 50%; background: var(--tinta); }
+.btn__dot svg { width: 42%; height: 42%; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.btn--small { font-size: 15px; }
+
+/* barra de rolagem própria: fio sobreposto, aparece ao rolar */
+.sbar { position: fixed; top: 6px; bottom: 6px; right: 3px; width: 10px; z-index: 60; pointer-events: none; }
+.sbar__thumb { position: absolute; right: 0; width: 4px; border-radius: 4px; background: var(--sbar, rgba(21, 17, 14, .42)); opacity: 0; transition: opacity .5s ease, width .2s ease; pointer-events: auto; cursor: grab; }
+.sbar.is-on .sbar__thumb { opacity: 1; }
+.sbar.is-drag .sbar__thumb, .sbar__thumb:hover { width: 7px; opacity: 1; }
+.sbar.is-drag .sbar__thumb { cursor: grabbing; }
+.sbar.is-none { display: none; }
+html[data-theme='escuro'] { --sbar: rgba(246, 239, 227, .5); }
+@media (hover: none) { .sbar__thumb { pointer-events: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

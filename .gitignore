@@ -1,0 +1,7 @@
+node_modules
+dist
+# pacote da template Fermento (licença ProfitizeBuild: não publicar o prompt/arquivos)
+arquivos/
+# originais gerados em fundo azul (pesados; o site usa os recortes em public/img)
+fonte/azul/
+*.log

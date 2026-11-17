@@ -1,0 +1,14 @@
+/* hero: os dois textos curtos dos lados e a pílula sobre a pizza, como na imagem aprovada */
+.hero, .corte, .menu, .forno, .massa { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.hero__left, .hero__right { position: absolute; top: calc(var(--wb) + 6.6vh); visibility: hidden; }
+.hero__left { left: var(--gutter); }
+.hero__right { left: 77.4vw; }
+.cta-row { position: absolute; left: 0; right: 0; top: var(--cta-y); display: flex; justify-content: center; transform: translateY(-50%); pointer-events: none; }
+.cta-row .btn { pointer-events: auto; visibility: hidden; }
+.hero a, .menu a { pointer-events: auto; }
+
+@media (max-width: 759px), (max-aspect-ratio: 4/5) {
+  .hero__left, .hero__right { top: calc(var(--wb) + 22px); font-size: 15px; line-height: 1.28; }
+  .hero__left { left: 18px; width: 46%; }
+  .hero__right { left: auto; right: 18px; text-align: right; }
+}

@@ -1,0 +1,10 @@
+/* o corte: título embaixo à esquerda, texto embaixo à direita; a pizza no centro */
+.corte__title { position: absolute; left: var(--gutter); bottom: 8.5vh; color: var(--tinta); visibility: hidden; }
+.corte__text { position: absolute; right: var(--gutter); bottom: calc(8.5vh + 0.2em); width: min(25vw, 340px); visibility: hidden; }
+.ln { display: block; overflow: clip; padding: 0.12em 0.04em 0.3em; margin: -0.12em -0.04em -0.3em; }
+.ln__in { display: block; will-change: transform; }
+
+@media (max-width: 759px), (max-aspect-ratio: 4/5) {
+  .corte__title { bottom: auto; top: calc(var(--c-bot) + 30px); left: 18px; font-size: 40px; }
+  .corte__text { bottom: auto; top: calc(var(--c-bot) + 132px); left: 18px; right: 18px; width: auto; font-size: 16px; }
+}
