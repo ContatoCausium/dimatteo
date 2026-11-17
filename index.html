@@ -48,7 +48,7 @@
   </script>
   <link rel="icon" href="/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="/img/pizza-marguerita.webp" imagesrcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita.webp 1400w" imagesizes="(max-width: 759px) 150vw, 85vw">
+  <link rel="preload" as="image" type="image/webp" fetchpriority="high" href="/img/pizza-marguerita.webp" imagesrcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita-1100.webp 1100w, /img/pizza-marguerita.webp 1400w" imagesizes="(max-width: 759px) 150vw, 85vw">
 </head>
 <body class="is-loading">
   <a class="skip" href="#pedido" data-go="pedido" data-focus=".opt__link">Ir para o pedido</a>
@@ -81,10 +81,10 @@
         </div>
 
         <div class="win" aria-hidden="true">
-          <div class="win__layer win__layer--forno"><img src="/img/forno.webp" fetchpriority="low" alt="" width="1600" height="1067" decoding="async"></div>
-          <div class="win__layer win__layer--massa"><img src="/img/massa.webp" fetchpriority="low" alt="" width="1600" height="1067" decoding="async"></div>
+          <div class="win__layer win__layer--forno"><img data-src="/img/forno.webp" alt="" width="1600" height="1067" decoding="async"></div>
+          <div class="win__layer win__layer--massa"><img data-src="/img/massa.webp" alt="" width="1600" height="1067" decoding="async"></div>
           <div class="win__layer win__layer--kraft"></div>
-          <div class="win__layer win__layer--caixa"><img src="/img/caixa-base.webp" fetchpriority="low" alt="" width="1200" height="1200" decoding="async"></div>
+          <div class="win__layer win__layer--caixa"><img data-src="/img/caixa-base.webp" alt="" width="1200" height="1200" decoding="async"></div>
           <i class="win__lip"></i>
         </div>
 
@@ -92,7 +92,7 @@
         <div class="pz" aria-hidden="true">
           <i class="pz__shadow"></i>
           <div class="pz__body">
-            <img class="pz__whole" src="/img/pizza-marguerita.webp" srcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="high" alt="" width="1400" height="1400" decoding="async">
+            <img class="pz__whole" src="/img/pizza-marguerita.webp" srcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita-1100.webp 1100w, /img/pizza-marguerita.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="high" alt="" width="1400" height="1400" decoding="async">
             <div class="pz__slices"></div>
             <div class="pz__cuts"><i></i><i></i><i></i><i></i></div>
             <i class="pz__fire"></i>
@@ -100,11 +100,11 @@
         </div>
 
         <div class="platter" aria-hidden="true">
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-marguerita.webp" srcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-calabresa.webp" srcset="/img/pizza-calabresa-800.webp 800w, /img/pizza-calabresa.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-frango.webp" srcset="/img/pizza-frango-800.webp 800w, /img/pizza-frango.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-lombo.webp" srcset="/img/pizza-lombo-800.webp 800w, /img/pizza-lombo.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
-          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-costelinha.webp" srcset="/img/pizza-costelinha-800.webp 800w, /img/pizza-costelinha.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img src="/img/pizza-marguerita.webp" srcset="/img/pizza-marguerita-800.webp 800w, /img/pizza-marguerita-1100.webp 1100w, /img/pizza-marguerita.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" fetchpriority="low" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img data-src="/img/pizza-calabresa.webp" data-srcset="/img/pizza-calabresa-800.webp 800w, /img/pizza-calabresa-1100.webp 1100w, /img/pizza-calabresa.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img data-src="/img/pizza-frango.webp" data-srcset="/img/pizza-frango-800.webp 800w, /img/pizza-frango-1100.webp 1100w, /img/pizza-frango.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img data-src="/img/pizza-lombo.webp" data-srcset="/img/pizza-lombo-800.webp 800w, /img/pizza-lombo-1100.webp 1100w, /img/pizza-lombo.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" alt="" width="1400" height="1400" decoding="async"></div>
+          <div class="plate"><i class="plate__shadow"></i><img data-src="/img/pizza-costelinha.webp" data-srcset="/img/pizza-costelinha-800.webp 800w, /img/pizza-costelinha-1100.webp 1100w, /img/pizza-costelinha.webp 1400w" sizes="(max-width: 759px) 150vw, 85vw" alt="" width="1400" height="1400" decoding="async"></div>
         </div>
 
         <!-- camadas da frente: a tampa da caixa e o card de pedido -->
@@ -236,7 +236,7 @@
     </div>
     <div class="rodape__scene">
       <p class="rodape__word" data-rise aria-hidden="true"><span class="rodape__in">Di Matteo</span></p>
-      <img class="rodape__land" src="/img/gravura.webp" alt="Gravura vermelha de campos de trigo, pés de tomate e uma casa com forno a lenha" width="2000" height="900" loading="lazy" decoding="async">
+      <img class="rodape__land" data-src="/img/gravura.webp" data-srcset="/img/gravura-1400.webp 1400w, /img/gravura.webp 2000w" sizes="(max-width: 759px) 205vw, 100vw" alt="Gravura vermelha de campos de trigo, pés de tomate e uma casa com forno a lenha" width="2000" height="900" loading="lazy" decoding="async">
     </div>
     <div class="rodape__end">
       <p>© 2026 Di Matteo Pizzaria</p>

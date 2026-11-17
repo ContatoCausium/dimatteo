@@ -49,6 +49,24 @@ const fonts = Promise.all([
 const decode = (img) => (img.complete ? img.decode() : new Promise((ok) => img.addEventListener('load', ok, { once: true })).then(() => img.decode())).catch(() => {});
 const assets = [fonts, decode(document.querySelector('.pz__whole'))];
 
+// O resto das fotos (os outros sabores, forno, massa, caixa e a gravura do rodapé) só aparece depois de rolar.
+// Elas vêm com data-src no HTML e só começam a baixar no primeiro gesto da pessoa (rolar, tocar, clicar, teclar):
+// assim a pizza da hero não divide a banda do 4G com 2 MB de fotos que ninguém está vendo ainda.
+let scenesLoaded = false;
+function loadScenes() {
+  if (scenesLoaded) return;
+  scenesLoaded = true;
+  GESTURES.forEach((ev) => removeEventListener(ev, loadScenes, true));
+  document.querySelectorAll('img[data-src]').forEach((img) => {
+    if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+    img.src = img.dataset.src;
+    img.removeAttribute('data-src');
+    img.removeAttribute('data-srcset');
+  });
+}
+const GESTURES = ['wheel', 'touchstart', 'pointerdown', 'keydown', 'scroll'];
+GESTURES.forEach((ev) => addEventListener(ev, loadScenes, { capture: true, passive: true }));
+
 await fonts;
 
 const words = {

@@ -24,8 +24,8 @@ for f in sorted(src.glob('pizza-*.jpg')):
     big = cut.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
     canvas = Image.new('RGBA', (OUT, OUT), (0, 0, 0, 0))
     canvas.paste(big, (round(OUT / 2 - cx * s), round(OUT / 2 - cy * s)), big)
-    # duas larguras para o srcset: 1400 (desktop e celulares de tela densa) e 800 (o resto); qualidade 78
-    for w, suf in ((1400, ''), (800, '-800')):
+    # três larguras para o srcset: 1400 (desktop grande), 1100 (celular de tela densa) e 800; qualidade 78
+    for w, suf in ((1400, ''), (1100, '-1100'), (800, '-800')):
         dst = Path('public/img') / f'{f.stem}{suf}.webp'
         img = canvas if w == OUT else canvas.resize((w, w), Image.LANCZOS)
         img.save(dst, 'WEBP', quality=78, method=6, alpha_quality=90)
