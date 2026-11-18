@@ -7,7 +7,7 @@ export const M = {
   cut: 0.95, // carretilha e fatias
   menu: 1.9, // as fatias fecham e o disco desce para o prato
   steps: [1.9, 2.65, 3.4, 4.15, 4.9], // um sabor por marco
-  menuOut: 5.65, // o prato devolve a margherita (o giro leva ~1 s; o forno só começa depois)
+  menuOut: 5.65, // a pizza da vez sai do prato para o forno (sem giro a mais; o forno começa em 5,95)
   toDark: [5.95, 6.45], // farinha → preto-brasa
   lit: [6.05, 6.8], // o fogo acende (só depois que a página escureceu um pouco)
   ovenIn: [6.1, 6.95], // a pizza deita e entra pela boca do forno

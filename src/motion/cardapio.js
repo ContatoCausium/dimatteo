@@ -1,6 +1,7 @@
 // Cardápio: um gesto, um sabor. A pizza do corte fecha as fatias enquanto desce e vira o disco no topo do prato
 // giratório; cada marco gira o prato 72° e troca o nome gigante (o antigo murcha, o novo cresce como massa). No fim
-// o prato devolve a margherita, que sai do disco para o forno. Os textos seguem o prato (o sabor que está chegando),
+// a pizza que está no prato (a última, rolando em ordem) sai do disco direto para o forno, sem um giro a mais: antes
+// o prato devolvia a margherita, que passava sem nome nem preço. Os textos seguem o prato (o sabor que está chegando),
 // não o scroll, para nome e pizza nunca se desencontrarem; uma máquina de estados pequena garante a ordem.
 import { gsap } from 'gsap';
 import { rise, fall } from './words.js';
@@ -16,7 +17,22 @@ export function cardapio({ st, words, corte, reduced, onShow }) {
   let want = -1; // o que o scroll pede: -1 antes do cardápio, 0..N-1 os sabores, N depois (forno)
   let shown = -1; // o que está na tela: -1 "Fermento", 0..N-1 o sabor, N nenhum
   let platTo = 0;
+  let out = 0; // o sabor que está na pizza do palco (a que vai ao forno e à caixa): 0 é a margherita da hero
   let tl;
+
+  // a pizza do palco veste a foto do sabor que sai do prato (a mesma <picture>, trocando o srcset)
+  const whole = document.querySelector('.pz__whole');
+  const wholeSrc = whole.previousElementSibling;
+  const plates = [...document.querySelectorAll('.plate picture')];
+  function wear(i) {
+    if (i === out) return;
+    out = i;
+    const pic = plates[i];
+    const so = pic.querySelector('source'), img = pic.querySelector('img');
+    if (wholeSrc && so?.srcset) wholeSrc.srcset = so.srcset;
+    if (img.srcset) whole.srcset = img.srcset;
+    if (img.getAttribute('src')) whole.src = img.getAttribute('src');
+  }
 
   const isFlavor = (i) => i >= 0 && i < N;
   const nameOf = (i) => (i === -1 ? words.hero : isFlavor(i) ? words.names[i] : null);
@@ -77,11 +93,14 @@ export function cardapio({ st, words, corte, reduced, onShow }) {
       gsap.to(st, { menu: 0, duration: reduced ? 0 : 0.7, ease: 'fm-io', overwrite: 'auto' });
     } else if (phase === 'menu') {
       if (isFlavor(want)) {
-        if (platTo !== want) { texts(want); spin(want); }
+        // texts() não repete o que já está na tela; voltando do forno, o prato já está no sabor e só os textos entram
+        texts(want);
+        if (platTo !== want) spin(want);
       } else if (want < 0) {
         phase = 'toAbove';
         texts(-1);
         spin(st.plat > N / 2 ? N : 0, () => {
+          wear(0); // de volta à hero: a margherita
           st.platOn = false;
           st.plat = 0;
           tl = gsap.to(st, {
@@ -92,7 +111,10 @@ export function cardapio({ st, words, corte, reduced, onShow }) {
       } else {
         phase = 'toBelow';
         texts(N);
-        spin(N, () => {
+        // o sabor da vez assenta no topo do prato (se o giro estava no meio) e é ele que vai ao forno
+        const k = ((Math.round(platTo) % N) + N) % N;
+        spin(platTo === N ? N : k, () => {
+          wear(k);
           st.platOn = false;
           phase = 'below';
           st.catch = 0;
@@ -103,8 +125,8 @@ export function cardapio({ st, words, corte, reduced, onShow }) {
     } else if (phase === 'below') {
       if (want >= N) return;
       phase = 'menu';
-      st.plat = N;
-      platTo = N;
+      st.plat = out; // o prato volta com a pizza que desceu do forno no topo
+      platTo = out;
       st.platOn = true;
       sync();
     }
