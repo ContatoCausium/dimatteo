@@ -57,6 +57,7 @@ function loadScenes() {
   if (scenesLoaded) return;
   scenesLoaded = true;
   GESTURES.forEach((ev) => removeEventListener(ev, loadScenes, true));
+  document.querySelectorAll('source[data-srcset]').forEach((so) => { so.srcset = so.dataset.srcset; so.removeAttribute('data-srcset'); });
   document.querySelectorAll('img[data-src]').forEach((img) => {
     if (img.dataset.srcset) img.srcset = img.dataset.srcset;
     img.src = img.dataset.src;

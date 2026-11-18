@@ -29,7 +29,10 @@ for f in sorted(src.glob('pizza-*.jpg')):
         dst = Path('public/img') / f'{f.stem}{suf}.webp'
         img = canvas if w == OUT else canvas.resize((w, w), Image.LANCZOS)
         img.save(dst, 'WEBP', quality=78, method=6, alpha_quality=90)
-        print(f'{dst} {dst.stat().st_size // 1024} KB')
+        # AVIF na frente (no <picture>): metade do peso do WebP sem diferença visível; o WebP fica de reserva
+        av = dst.with_suffix('.avif')
+        img.save(av, 'AVIF', quality=50, speed=4)
+        print(f'{dst} {dst.stat().st_size // 1024} KB · {av.name} {av.stat().st_size // 1024} KB')
 
 # folha de conferência: as cinco lado a lado sobre a farinha e sobre o vinho
 names = ['marguerita', 'calabresa', 'frango', 'lombo', 'costelinha']

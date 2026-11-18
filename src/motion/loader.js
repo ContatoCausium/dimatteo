@@ -4,7 +4,8 @@
 import { gsap } from 'gsap';
 import { rise } from './words.js';
 
-const MIN = 1.4; // segundos: o contador precisa ser lido mesmo com tudo em cache
+const MIN = 1.0; // segundos: o contador precisa ser lido mesmo com tudo em cache (era 1,4; encurtado para a pizza
+// da hero aparecer antes no celular, que o Google mede como "maior elemento da primeira tela")
 
 export function loader({ words, st, assets, reduced, onDone }) {
   const box = document.querySelector('.loader');
@@ -41,7 +42,7 @@ export function loader({ words, st, assets, reduced, onDone }) {
     gsap.to(box, { autoAlpha: 0, y: 26, duration: 0.45, ease: 'fm-in' });
     gsap.set(w.spans, { clearProps: 'transform' });
     rise(w, { from: 0.8, dur: 1.0, each: 0.05, delay: 0.12 });
-    gsap.to(st, { intro: 1, duration: 1.9, ease: 'expo.out', delay: 0.2 });
+    gsap.to(st, { intro: 1, duration: 1.9, ease: 'expo.out', delay: 0.06 });
     onDone?.(0.95);
   }
 
