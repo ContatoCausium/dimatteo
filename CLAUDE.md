@@ -33,7 +33,13 @@ cardápio giratório → forno → massa → caixa → card de pedido → rodap�
   `data-src`/`data-srcset` e baixam no primeiro gesto (rolar, tocar, clicar, teclar): `loadScenes()` em `main.js`.
   Imagem nova abaixo da primeira tela segue o mesmo esquema.
 - O rodapé fica `visibility: hidden` enquanto `body.is-loading` (antes do pin ele cai na primeira tela).
-- Abertura com mínimo de 1,0 s (`loader.js`). PageSpeed celular (nov/2026): 92, LCP 3,3 s, SEO/acessibilidade 100.
+- Abertura: a pizza entra assim que a foto da hero fica pronta (contador no mínimo 0,45 s na tela), sem esperar o
+  contador chegar a 48 h (`loader.js`).
+- Textura de kraft via `--kraft-img` (só com `html.cenas`, no primeiro gesto); beira rasgada do rodapé só depois da
+  abertura; Gambetta 400 removida (a legenda da massa usa 500).
+- O PageSpeed simula 4G e conta como "antes do LCP" tudo o que baixa antes da pizza da hero aparecer: qualquer
+  imagem, fonte ou textura nova que não seja da primeira tela tem de esperar o primeiro gesto.
+- PageSpeed celular (17/11/2026): desempenho 98, LCP 2,4 s, SEO, acessibilidade e boas práticas 100.
 - O CSS vai embutido no `<head>` no build (plugin `inlineCss` em `vite.config.js`): nada bloqueia a primeira tela.
 - `public/og.jpg` (1200x630, `fonte/scripts/og.py`), tags og/twitter, JSON-LD `Restaurant` (sem horário: os dias
   ainda não foram confirmados), `robots.txt`, `sitemap.xml`, página `/privacidade` (`privacidade.html`,
