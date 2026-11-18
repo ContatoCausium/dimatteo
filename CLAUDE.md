@@ -27,9 +27,13 @@ cardápio giratório → forno → massa → caixa → card de pedido → rodap�
 `npm run dev` (porta 5182) · `npm run build` → `dist/` em qualquer hospedagem estática.
 
 ## Desempenho e SEO (Raio-X ProfitizeBuild, nov/2026)
-- Pizzas em 2 larguras (1400 e 800, WebP q78) com `srcset`/`sizes`; as fatias usam o `currentSrc` da `<img>` inteira.
-  Gere de novo com `py fonte/scripts/recorta_pizzas.py`.
-- A abertura espera só as fontes e a pizza da hero (`main.js`); os outros sabores carregam por trás.
+- Pizzas em 3 larguras (800, 1100, 1400) em `<picture>`: AVIF q50 na frente, WebP q78 de reserva; as fatias usam o
+  `currentSrc` da `<img>` inteira. Gere de novo com `py fonte/scripts/recorta_pizzas.py`.
+- Na abertura só baixa a pizza da hero (preload AVIF). Os outros sabores, forno, massa, caixa e a gravura vêm com
+  `data-src`/`data-srcset` e baixam no primeiro gesto (rolar, tocar, clicar, teclar): `loadScenes()` em `main.js`.
+  Imagem nova abaixo da primeira tela segue o mesmo esquema.
+- O rodapé fica `visibility: hidden` enquanto `body.is-loading` (antes do pin ele cai na primeira tela).
+- Abertura com mínimo de 1,0 s (`loader.js`). PageSpeed celular (nov/2026): 92, LCP 3,3 s, SEO/acessibilidade 100.
 - O CSS vai embutido no `<head>` no build (plugin `inlineCss` em `vite.config.js`): nada bloqueia a primeira tela.
 - `public/og.jpg` (1200x630, `fonte/scripts/og.py`), tags og/twitter, JSON-LD `Restaurant` (sem horário: os dias
   ainda não foram confirmados), `robots.txt`, `sitemap.xml`, página `/privacidade` (`privacidade.html`,
