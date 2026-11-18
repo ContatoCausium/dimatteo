@@ -40,7 +40,7 @@ const fonts = Promise.all([
   document.fonts.load('700 100px "Clash Display"'),
   document.fonts.load('600 100px "Clash Display"'),
   document.fonts.load('italic 600 100px Gambetta'),
-  document.fonts.load('italic 400 100px Gambetta'),
+  document.fonts.load('italic 500 100px Gambetta'),
   document.fonts.load('500 16px "Cabinet Grotesk"'),
   document.fonts.load('700 16px "Cabinet Grotesk"'),
 ]);
@@ -56,6 +56,7 @@ let scenesLoaded = false;
 function loadScenes() {
   if (scenesLoaded) return;
   scenesLoaded = true;
+  document.documentElement.classList.add('cenas');
   GESTURES.forEach((ev) => removeEventListener(ev, loadScenes, true));
   document.querySelectorAll('source[data-srcset]').forEach((so) => { so.srcset = so.dataset.srcset; so.removeAttribute('data-srcset'); });
   document.querySelectorAll('img[data-src]').forEach((img) => {

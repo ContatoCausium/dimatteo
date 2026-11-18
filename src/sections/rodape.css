@@ -3,6 +3,7 @@
 /* até o palco montar (o pin cria a altura do filme), o rodapé ficaria colado na primeira tela: escondido, ele não
    aparece por baixo da abertura nem conta como "maior elemento" da primeira tela */
 .is-loading .rodape { visibility: hidden; }
+.is-loading .rodape__tear { display: none; }
 .rodape { position: relative; z-index: 2; margin-top: -100vh; background: var(--farinha) url('/img/grao.webp') 0 0 / 300px; background-blend-mode: soft-light; padding: clamp(96px, 15vh, 170px) var(--gutter) 0; }
 /* a beira rasgada: sombra só acima da beira, e o papel com o mesmo preenchimento do rodapé (farinha + grão no mesmo
    ladrilho), recortado pela forma e com a luz do miolo por cima; a emenda com o rodapé não aparece */

@@ -69,7 +69,7 @@
   margin: 6px calc(-1 * var(--pad)); padding: 0 var(--pad); border-radius: 14px;
   transition: transform .45s var(--fm-back);
 }
-.opt__link::before { background-image: url('/img/kraft.webp'); background-size: max(1520px, 100vw) auto; background-blend-mode: multiply; }
+.opt__link::before { background-image: var(--kraft-img); background-size: max(1520px, 100vw) auto; background-blend-mode: multiply; }
 .opt__name, .opt__desc { transition: color var(--t-out) var(--fm-in); }
 .opt__go { transition: background-color var(--t-out) var(--fm-in), color var(--t-out) var(--fm-in); }
 .opt__go svg { transition: transform .5s var(--fm-out); }

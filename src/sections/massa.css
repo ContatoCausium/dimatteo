@@ -1,6 +1,6 @@
 /* massa: "48 h" (posição do layout.js) por cima da macro; o painel de vidro fosco no canto do card */
 .massa__num { z-index: 1; font-family: var(--f-display); font-weight: 700; color: var(--vermelho-aceso); visibility: hidden; }
-.massa__cap { position: absolute; left: calc(var(--cd-l) + var(--gutter) * 1.1 + 0.4vw); top: calc(var(--mw-b) + 1.2vh); font-family: var(--f-serif); font-style: italic; font-weight: 400; font-size: clamp(30px, 2.2vw + 8px, 50px); line-height: 1.1; color: var(--creme); visibility: hidden; }
+.massa__cap { position: absolute; left: calc(var(--cd-l) + var(--gutter) * 1.1 + 0.4vw); top: calc(var(--mw-b) + 1.2vh); font-family: var(--f-serif); font-style: italic; font-weight: 500; font-size: clamp(30px, 2.2vw + 8px, 50px); line-height: 1.1; color: var(--creme); visibility: hidden; }
 .massa__glass {
   position: absolute; right: calc(100% - var(--cd-r) + 22px); bottom: calc(100% - var(--cd-b) + 22px); width: min(400px, 30vw);
   padding: 22px 26px 24px; border-radius: 18px; color: var(--creme); font-size: var(--t-body); line-height: 1.45;

@@ -11,6 +11,9 @@
   --creme-2: #bcae9c;
   --kraft: #ca9f76;
   --kraft-tinta: #3a2414;
+  /* a textura de papelão (120 KB) só aparece na caixa e no card de pedido: baixa no primeiro gesto (html.cenas),
+     não na abertura. Até lá, a cor lisa do kraft. */
+  --kraft-img: none;
 
   /* tipo */
   --f-display: 'Clash Display', 'Helvetica Neue', Arial, sans-serif;
@@ -38,3 +41,4 @@
   --t-press: .12s;
   --vermelho-press: #6f1624; /* a tinta apertada */
 }
+html.cenas { --kraft-img: url('/img/kraft.webp'); }
